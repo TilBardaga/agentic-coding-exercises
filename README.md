@@ -2,7 +2,7 @@
 
 This repository contains **hands-on exercises** for working systematically with AI coding assistants: from measuring your current workflow, through planning, commands, project rules, and reviews. Each `exercise-*` folder has its own `README.md` with the assignment and details.
 
-**Workshop slides (Dyflexis):** [https://dyflexis-workshop.vercel.app/dyflexis](https://dyflexis-workshop.vercel.app/dyflexis)
+**Workshop slides (Dyflexis):** [https://dyflexis-deck.vercel.app/dyflexis](https://dyflexis-deck.vercel.app/dyflexis)
 
 **First:** install required tools using [`setup/README.md`](setup/README.md).
 
