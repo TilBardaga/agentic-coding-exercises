@@ -180,7 +180,7 @@ Once you've created your system review command, test it:
 
 **1. Generate an execution report:**
 
-Run this in the context where you completed a recent feature (for example exercise 4.3 or another implementation you care about):
+Run this in the context where you completed a recent feature (for example **exercise 4** (`/prime`) or another implementation you care about):
 
 ```
 /execution-report

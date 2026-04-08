@@ -1,4 +1,4 @@
-# Example solution: exercise 4.1 — `/prime` command
+# Example solution: exercise 4 — `/prime` command
 
 **Purpose:** Illustrate one possible **`/prime`** command: context retrieval only, output for the human.
 
@@ -6,7 +6,7 @@
 
 ## Important note
 
-This is an **example**, not the only valid answer. Your repo may need fewer sections or different paths. The workshop ships a **richer** reference in **`exercise-4.1/prime.example.md`** (fullstack-style); this file stays shorter and generic.
+This is an **example**, not the only valid answer. Your repo may need fewer sections or different paths. The workshop ships a **richer** reference in **`../prime.example.md`**; this file stays shorter and generic.
 
 ---
 
@@ -80,4 +80,4 @@ Keep the report scannable (bullets, short paragraphs).
 
 ## Related file in this workshop
 
-See **`../../exercise-4.1/prime.example.md`** for a **detailed** fullstack-shaped example (many concrete paths and checks).
+See **`../prime.example.md`** for a **detailed** command example (many concrete steps and checks).
