@@ -1,0 +1,51 @@
+---
+description: "pytest, isolation, AAA, TDD habits (workshop app/backend tests)"
+alwaysApply: false
+globs:
+  - "**/app/backend/tests/**/*.py"
+  - "**/app/backend/tests/conftest.py"
+---
+
+# Workshop backend testing
+
+**Scope:** **`**/app/backend/tests/`**. Normative routing: **`INDEX.mdc`**.
+
+## 1. Commands
+
+From the directory that contains the backend **`pyproject.toml`** (e.g. `exercise-1/app/backend/`):
+
+```bash
+uv sync
+uv run pytest -v
+uv run ruff check .
+```
+
+## 2. Isolation
+
+- Tests must **not** depend on run order.
+- Avoid shared mutable global state. Use **`conftest.py`** fixtures for setup/teardown (`yield` patterns) when resources need cleanup.
+
+## 3. Arrange — Act — Assert
+
+Structure tests in three clear blocks separated by blank lines:
+
+1. **Arrange** — build inputs and dependencies  
+2. **Act** — call the unit under test  
+3. **Assert** — check outcomes
+
+## 4. Fakes vs mocks
+
+- Prefer **fakes** (in-memory doubles, simple stubs) for your own services when they stay readable.
+- Use **`unittest.mock`** / **`monkeypatch`** for **external** HTTP or third-party SDKs when a fake would be heavier than the value.
+
+## 5. Test-driven flow
+
+For behavior changes: **red → green → refactor**—write or update a failing test that expresses the requirement, then implement until it passes.
+
+## 6. No production dependencies in unit tests
+
+Do not hit real external APIs or shared production databases in **unit** tests unless the exercise explicitly defines an integration/e2e lane.
+
+---
+
+See **`INDEX.mdc`** for other workshop rules.

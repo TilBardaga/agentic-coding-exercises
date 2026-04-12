@@ -1,0 +1,62 @@
+---
+description: "RCA format and durable debug notes (workshop backend + frontend)"
+alwaysApply: false
+globs:
+  - "**/app/backend/**/*.py"
+  - "**/app/frontend/**/*.ts"
+  - "**/app/frontend/**/*.tsx"
+---
+
+# Workshop debugging
+
+**Scope:** **`**/app/backend/**/*.py`** and **`**/app/frontend/**/*.{ts,tsx}`**. Normative routing: **`INDEX.mdc`**.
+
+When you learn something reusable from a production-like bug or workshop blocker, append a **short** entry (blameless, factual).
+
+## Standard entry format
+
+- **Symptom:** What the user or tests saw?  
+- **Root cause:** The underlying reason (not who).  
+- **Key question:** Fast check for the next person (“is X true?”).  
+- **Permanent fix:** What changed in code, config, or docs?
+
+## Curated patterns (workshop)
+
+### 1. `uv` CLI vs `python -m uv`
+
+- **Symptom:** `uv` works in the shell but `python -m uv` fails with `ModuleNotFoundError`.  
+- **Root cause:** `uv` is often installed as a **standalone** binary, not a Python package in the active env.  
+- **Key question:** Does `uv --version` work while `python -m uv` does not?  
+- **Permanent fix:** Invoke **`uv <subcommand>`** directly from the backend root (e.g. `uv run pytest`).
+
+### 2. PowerShell vs POSIX commands
+
+- **Symptom:** `mkdir -p`, `rm -rf`, or `&&` chains fail in PowerShell.  
+- **Root cause:** Different shell semantics and older PS versions.  
+- **Key question:** Are we documenting POSIX-only one-liners for Windows users?  
+- **Permanent fix:** Use PowerShell-native equivalents or separate lines; prefer **`uv run`** / repo scripts over shell tricks.
+
+### 3. Unicode and Windows consoles
+
+- **Symptom:** `UnicodeEncodeError` printing symbols or emoji.  
+- **Root cause:** Console code page (e.g. CP1252) vs UTF-8 output.  
+- **Key question:** Does the failure happen only when printing decorative characters?  
+- **Permanent fix:** Prefer **plain ASCII** status text in CLI output for workshop scripts.
+
+### 4. Wrong working directory / imports
+
+- **Symptom:** `ModuleNotFoundError` for `app` when running pytest or a script.  
+- **Root cause:** Command run from a directory that is not the **`pyproject.toml`** root for that backend.  
+- **Key question:** Is the shell cwd **`.../app/backend`** (or using `uv run` from there)?  
+- **Permanent fix:** `cd` to the backend root; use **`uv run pytest`** from that folder.
+
+### 5. Frontend env not visible after change
+
+- **Symptom:** `import.meta.env` (or equivalent) missing a new variable.  
+- **Root cause:** Dev server not restarted; or variable not allowed/exposed by bundler rules.  
+- **Key question:** Did you restart after editing `.env`? Is the name spelled exactly as the bundler expects?  
+- **Permanent fix:** Restart dev server; confirm public-prefix rules for that stack.
+
+---
+
+See **`INDEX.mdc`** for other workshop rules.

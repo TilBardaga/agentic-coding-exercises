@@ -1,0 +1,64 @@
+---
+description: "Secrets, config, paths, frontend client safety (workshop app/backend + app/frontend)"
+alwaysApply: false
+globs:
+  - "**/app/backend/**/*.py"
+  - "**/app/backend/pyproject.toml"
+  - "**/app/frontend/**/*.ts"
+  - "**/app/frontend/**/*.tsx"
+  - "**/app/frontend/**/*.css"
+  - "**/app/frontend/package.json"
+  - "**/app/frontend/.env"
+  - "**/app/frontend/.env.*"
+---
+
+# Workshop security and configuration
+
+**Scope:** **`**/app/backend/`** and **`**/app/frontend/`**. Normative routing: **`INDEX.mdc`**.
+
+## Backend
+
+### 1. Secrets and configuration
+
+- Load secrets and environment-specific values from **environment variables** (or the exercise’s settings module)—**not** hardcoded in source.
+- Treat API keys and tokens as **sensitive**; use types/patterns that avoid accidental logging (`SecretStr` or equivalent where available).
+
+### 2. Paths and portability
+
+- Use **`pathlib.Path`** for filesystem paths—**no** hardcoded `C:\...` or Unix-only assumptions in shared code.
+- Keep repo paths **relative** to the project root or configurable.
+
+### 3. Defense in depth
+
+- Validate at the **HTTP boundary** (Pydantic models).
+- Apply **least privilege**: endpoints and services should only access data they need.
+
+### 4. Bulk and destructive work
+
+- Scripts or endpoints that **mass-delete**, **overwrite**, or **migrate** data need explicit human intent—do not hide them behind vague flags.
+
+## Frontend
+
+### 5. Public environment variables
+
+Bundlers (Vite, Bun, etc.) **inline** “public” env vars into the client bundle. **Never** put private API keys or secrets in variables exposed to the browser (e.g. names like **`VITE_*`** in Vite—treat any similar prefix for your bundler the same way).
+
+### 6. XSS and HTML
+
+- Do not render **unsanitized** HTML from users. Avoid **`dangerouslySetInnerHTML`** unless reviewed and justified.
+
+### 7. Input validation
+
+- Validate shapes at the **edge** (forms, API responses) with **Zod** or equivalent before trusting data in components.
+
+### 8. Client storage
+
+- Avoid storing **long-lived auth tokens** or **PII** in `localStorage` without an explicit, reviewed approach.
+
+### 9. CSP
+
+- Align with a **strict Content-Security-Policy** in production when the exercise deploys; avoid unsafe-inline unless required.
+
+---
+
+See **`INDEX.mdc`** for other workshop rules.

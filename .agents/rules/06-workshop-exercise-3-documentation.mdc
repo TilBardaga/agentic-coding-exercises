@@ -1,0 +1,17 @@
+---
+description: "Exercise 3 navigation docs — keep map, architecture, and changelog aligned with code"
+alwaysApply: true
+---
+
+# Exercise 3 documentation (conditional)
+
+**If your scope does not include `exercise-3/`** (app, `exercise-3/docs/`, or `exercise-3/CHANGELOG.md`), treat this file as **inactive**.
+
+When you **do** touch Exercise 3 product or navigation docs:
+
+1. Open **`exercise-3/docs/DOC_INDEX.md`** for the **SSOT table** (what to update when).
+2. Ship **code and doc updates in the same change set** when the plan lists **`Doc:`** checklist items—do not defer to a “later doc pass.”
+3. **Pillars:** **`CODEBASE_MAP.md`** (where), **`ARCHITECTURE.md`** (how / boundaries), **`CHANGELOG.md`** at **`exercise-3/`** root (what changed for humans).
+4. After **3.4**, a **short `README.md`** beside a new package (e.g. repository) is **optional** but encouraged when it clarifies a new boundary.
+
+**`/plan`** should name concrete doc tasks; **`/implement`** must execute them per **`dev-plan.md`**.

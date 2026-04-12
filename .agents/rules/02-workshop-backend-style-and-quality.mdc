@@ -1,0 +1,45 @@
+---
+description: "Python style, typing, Pydantic boundaries, logging (workshop app/backend)"
+alwaysApply: false
+globs:
+  - "**/app/backend/**/*.py"
+  - "**/app/backend/pyproject.toml"
+---
+
+# Workshop backend style and quality
+
+**Scope:** **`**/app/backend/**/*.py`**. Ruff config is authoritative for line length and rules—**follow this repo’s `pyproject.toml`** (exercises typically use **120** columns). Normative routing: **`INDEX.mdc`**.
+
+## 1. Typing
+
+- Use **type hints** on public functions and module-level APIs.
+- Prefer explicit types over `Any`; if you must use `Any`, add a short comment why.
+
+## 2. Validation at the boundary
+
+- Use **Pydantic** (or equivalent) at HTTP/API boundaries so invalid data fails **early**.
+- Keep internal service functions working with **already-validated** models where practical.
+
+## 3. Async discipline
+
+- Use **`async def`** for async I/O (HTTP handlers, async clients).
+- **Do not** call **blocking** I/O inside async endpoints without an explicit offload strategy (thread pool, async driver). Mixing blocking calls in the event loop starves other requests.
+
+## 4. Errors and logging
+
+- Raise **meaningful** exceptions from services; let FastAPI’s handlers or middleware map them to HTTP responses where that pattern exists.
+- Log with **stable** messages; include identifiers (request id, resource id) when useful.
+- **Never** log secrets, tokens, or full payloads containing credentials.
+
+## 5. Principles
+
+- **KISS** — prefer clear code over clever abstractions in exercises.
+- **SOLID** — single responsibility for functions and modules; depend on abstractions when testing demands it.
+
+## 6. Language
+
+- **English** for code comments, docstrings, and committed `.mdc` / `AGENTS.md` text. Chat with the user may use other languages.
+
+---
+
+See **`INDEX.mdc`** for other workshop rules.

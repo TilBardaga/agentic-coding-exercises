@@ -1,0 +1,45 @@
+---
+description: "Backend layers and boundaries for workshop app/backend (FastAPI exercises)"
+alwaysApply: false
+globs:
+  - "**/app/backend/**/*.py"
+  - "**/app/backend/pyproject.toml"
+---
+
+# Workshop backend architecture
+
+**Scope:** Python API trees under **`**/app/backend/`** (e.g. `exercise-1/app/backend/`). Normative routing: **`INDEX.mdc`**.
+
+## 1. Layered layout (exercise shape)
+
+Keep responsibilities separated—mirror the existing exercise layout:
+
+- **`app/api/`** — HTTP routes, request/response wiring, dependency injection. **No** heavy business rules here.
+- **`app/services/`** — Orchestration and use-cases (call models, external clients, other services).
+- **`app/models/`** — Domain and API models (e.g. Pydantic); keep them focused and reusable.
+- **`app/core/`** — Shared infrastructure: settings, logging setup, cross-cutting helpers.
+- **`app/data/`** — Seed data, static fixtures, or small data helpers—not a dump for unrelated logic.
+
+## 2. Dependency direction
+
+- **Inward:** `api` → `services` → (`models`, `data`, `core`) as needed.
+- Avoid **circular** imports between packages; extract shared types to `models` or thin helpers in `core` when two modules need each other.
+
+## 3. External and unstructured input
+
+At system edges (HTTP body, query params, third-party JSON), **validate and parse** into explicit models before deeper layers run. Do not pass raw `dict` deep into services when a schema is known.
+
+## 4. Data access (lightweight)
+
+Exercises are mostly file/seed-based or simple persistence. When you add real storage:
+
+- Keep read/write behind small functions or modules—**not** scattered in route handlers.
+- Prefer **clear** command vs query style mentally (mutations vs reads), even without a full CQRS stack.
+
+## 5. Colocated tests
+
+Tests live under **`tests/`** next to the backend package. See **`03-workshop-testing.mdc`**.
+
+---
+
+See **`INDEX.mdc`** for other workshop rules.

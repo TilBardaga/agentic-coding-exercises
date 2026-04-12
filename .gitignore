@@ -1,0 +1,45 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Node / Frontend
+node_modules/
+dist/
+.env
+
+# IDE
+.vscode/
+.idea/
+.gemini/
+# Workshop SSOT is .agents/rules; optional local Cursor mirror (not committed)
+.cursor/
+
+# Cache & Tests
+.pytest_cache/
+.ruff_cache/
+
+# OS specific clutter
+Thumbs.db
+.DS_Store
+
+# Bun specific cache (if it exists)
+.bun/
+
+# Local mirror of upstream course
+_upstream/
+
+# Archived exercises / facilitator-only material — not shipped in the public repo
+_legacy/
+
+# Cloned fullstack template 
+agentic-template-fullstack/
+
+# Cloned sample course materials
+agentic-coding-course-samples/
+
+# Cloned .cursor-template
+.cursor-template/
+
+# Cloned .agents-template
+.agents-template/

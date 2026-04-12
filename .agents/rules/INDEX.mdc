@@ -1,0 +1,39 @@
+---
+description: "Workshop rule routing — which .mdc to open (normative text lives only in numbered files)"
+alwaysApply: true
+---
+
+# Rule directory (routing only)
+
+**Normative content lives only in the numbered `NN-workshop-*.mdc` files below**—not in this index. Open the file that matches **what you are editing**.
+
+Rules are committed under **`.agents/rules/`**. Some editors only auto-attach `.mdc` files from a `.cursor/rules/` tree—use **`@`-references** to these files or a **local symlink/copy** if you need native rule attachment.
+
+## Glob reference (workshop tree)
+
+Rules target demo apps under any **`exercise-*/app/`** (and the same pattern elsewhere in the repo):
+
+| Area           | Glob patterns (conceptual)                                                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Backend Python | `**/app/backend/**/*.py`, `**/app/backend/pyproject.toml`                                                                                  |
+| Backend tests  | `**/app/backend/tests/**/*.py`, `**/app/backend/tests/conftest.py`                                                                         |
+| Frontend       | `**/app/frontend/**/*.ts`, `**/app/frontend/**/*.tsx`, `**/app/frontend/**/*.css`, `**/app/frontend/package.json`, `**/app/frontend/.env*` |
+
+**IDE note:** After adding rules, spot-check that editing e.g. `exercise-1/app/backend/app/main.py` and `exercise-1/app/frontend/src/App.tsx` attaches the expected rule set (or that `@.agents/rules/` gives the right context).
+
+**File count:** **Six** rule files (**`06`** is Exercise 3 navigation docs; frontend security and env are folded into **`04`**).
+
+## Which file when?
+
+| #   | File                                        | When to read                                                                                                                   |
+| --- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | `01-workshop-backend-architecture.mdc`      | **Backend** (`**/app/backend/`): layers `api` / `services` / `models` / `core` / `data`, where code belongs, thin boundaries.  |
+| 2   | `02-workshop-backend-style-and-quality.mdc` | **Backend** Python: typing, Ruff, Pydantic at boundaries, errors/logging, async discipline.                                    |
+| 3   | `03-workshop-testing.mdc`                   | **Backend tests** under `**/app/backend/tests/`: pytest, isolation, AAA, TDD.                                                  |
+| 4   | `04-workshop-security-and-config.mdc`       | **Backend + frontend**: secrets, env config, safe paths, bulk changes; **frontend** public env, XSS, validation, storage, CSP. |
+| 5   | `05-workshop-debugging.mdc`                 | **Backend + frontend** when debugging: RCA format, cross-platform and tooling pitfalls.                                        |
+| 6   | `06-workshop-exercise-3-documentation.mdc` | **Exercise 3** only (`exercise-3/` app or docs): map, architecture, root changelog, **`Doc:`** checklist discipline. |
+
+**Editors:** See [README.md](README.md) in this folder for ownership and consistency expectations.
+
+**Project constitution:** [AGENTS.md](../../AGENTS.md) at repo root.
