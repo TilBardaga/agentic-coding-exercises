@@ -177,7 +177,7 @@ exercise-3/
 There are also folders **outside** `exercise-3/` that you will use:
 
 ```
-.agents/                           ← the agent command library
+.cursor/                           ← the agent command library
 ├── commands/
 │   ├── prime.md                   ← /prime — loads repo context
 │   ├── plan.md                    ← /plan — writes a dev-plan.md
@@ -201,9 +201,9 @@ docs/agent-jobs/                   ← where /plan writes its output
 
 ### How to use agent commands
 
-The commands are markdown files in `.agents/commands/`. You feed them to your AI assistant:
+The commands are markdown files in `.cursor/commands/`. You feed them to your AI assistant:
 
-- **Cursor:** Type `@` in the chat input, navigate to `.agents/commands/prime.md` (or whichever command), select it, then press Enter. The AI reads the command file and follows its instructions.
+- **Cursor:** Type `@` in the chat input, navigate to `.cursor/commands/prime.md` (or whichever command), select it, then press Enter. The AI reads the command file and follows its instructions.
 - **Other assistants:** Open the command file, copy its content into your chat, and let the AI execute it.
 
 ### Parts 3.1 through 3.5
@@ -250,7 +250,7 @@ These are used in Exercises 3 and 4. You do not need them for Exercises 1 or 2.
 | `/execution-report` | Compares plan vs what actually happened | `docs/agent-jobs/<job>/execution-report.md` |
 | `/system-review` | Process retrospective — what to improve | `docs/agent-jobs/<job>/system-review.md` |
 
-Commands not used in this workshop: `/finish` (commit) and `/push` (publish). These exist in `.agents/commands/` for use in your own projects after the training.
+Commands not used in this workshop: `/finish` (commit) and `/push` (publish). These exist in `.cursor/commands/` for use in your own projects after the training.
 
 ---
 
@@ -258,7 +258,7 @@ Commands not used in this workshop: `/finish` (commit) and `/push` (publish). Th
 
 | Folder | What it is | Do you need it? |
 |--------|-----------|-----------------|
-| `.agents/rules/` | Coding conventions that the AI follows automatically | **No action needed.** These are loaded by the commands in Exercise 3. You can read them if you are curious. |
+| `.cursor/rules/` | Coding conventions that the AI follows automatically | **No action needed.** These are loaded by the commands in Exercise 3. You can read them if you are curious. |
 | `AGENTS.md` (root) | A thin "constitution" that points the AI to the rules | **No action needed.** Used by the commands behind the scenes. |
 
 ---

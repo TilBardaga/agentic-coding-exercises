@@ -41,10 +41,10 @@ Resolve the **job directory** `docs/agent-jobs/<job-name>/` (same rules as **`/e
 ## Context & Inputs (four artifacts)
 
 **Plan command (how planning was supposed to work):**  
-`.agents/commands/plan.md`
+`.cursor/commands/plan.md`
 
 **Implement command (how coding was supposed to work):**  
-`.agents/commands/implement.md`
+`.cursor/commands/implement.md`
 
 **Generated plan (what was specified):**  
 `docs/agent-jobs/<job-name>/dev-plan.md`

@@ -22,7 +22,7 @@ Resolve the **job directory** `docs/agent-jobs/<job-name>/` (same as **`/plan`**
 
 Save the review to **`docs/agent-jobs/<job-name>/code-review.md`** (overwrite for a fresh pass on the same job).
 
-Do **not** default to `.agents/code-reviews/`—keep validation artifacts with the job.
+Do **not** default to `.cursor/code-reviews/`—keep validation artifacts with the job.
 
 ## Core principles
 

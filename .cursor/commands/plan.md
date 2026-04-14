@@ -374,7 +374,7 @@ Execute as appropriate for this repo (discovered from configs/README).
 
 ## PROJECT HEALTH (`check-project-health` skill)
 
-The executor should follow **`.agents/skills/check-project-health/SKILL.md`** in **Implementation mode** **after** Gates and plan-listed validation, **before** treating the job as done (simple fix + re-run loop until checks pass, per that skill).
+The executor should follow **`.cursor/skills/check-project-health/SKILL.md`** in **Implementation mode** **after** Gates and plan-listed validation, **before** treating the job as done (simple fix + re-run loop until checks pass, per that skill).
 
 **In this plan, make “green” unambiguous:**
 

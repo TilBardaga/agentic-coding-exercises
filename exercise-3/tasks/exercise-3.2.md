@@ -10,7 +10,7 @@ Think of this as having a senior colleague review your PR before it merges. The 
 
 ## Step 1 — Run the code review
 
-Run the **`/code-review`** command ([`.agents/commands/code-review.md`](../../.agents/commands/code-review.md)). Point it to the same job folder you used in 3.1 (e.g. `catalog-filters-ex3`).
+Run the **`/code-review`** command ([`.cursor/commands/code-review.md`](../../.cursor/commands/code-review.md)). Point it to the same job folder you used in 3.1 (e.g. `catalog-filters-ex3`).
 
 The command will:
 1. Read the project conventions and standards
@@ -33,7 +33,7 @@ For each finding, ask yourself:
 
 ## Step 2 — Fix the findings
 
-Run the **`/code-review-fix`** command ([`.agents/commands/code-review-fix.md`](../../.agents/commands/code-review-fix.md)) to address the review findings.
+Run the **`/code-review-fix`** command ([`.cursor/commands/code-review-fix.md`](../../.cursor/commands/code-review-fix.md)) to address the review findings.
 
 The command will work through each issue, apply fixes, and run tests to make sure nothing breaks. If there are findings you intentionally want to skip (because you disagree or they are out of scope), mention that to the assistant so it can document the deferral.
 

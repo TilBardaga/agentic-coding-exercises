@@ -12,9 +12,9 @@ This is the first part of a three-part flow. **Parts 3.1, 3.2, and 3.3 all happe
 
 Before the assistant can plan anything, it needs to understand the codebase. The `/prime` command does this — it scans the repo structure, reads key files, checks recent history, and builds a mental model of what it is working with.
 
-Run the **`/prime`** command ([`.agents/commands/prime.md`](../../.agents/commands/prime.md)) with a focus on the area you will be working in:
+Run the **`/prime`** command ([`.cursor/commands/prime.md`](../../.cursor/commands/prime.md)) with a focus on the area you will be working in:
 
-- **Cursor:** Type `@` in the chat, navigate to `.agents/commands/prime.md`, select it, and add a focus like: `exercise-3/app, filtering, products API`
+- **Cursor:** Type `@` in the chat, navigate to `.cursor/commands/prime.md`, select it, and add a focus like: `exercise-3/app, filtering, products API`
 - **Other assistants:** Open `prime.md`, copy its content into your chat, and add the focus area
 
 **Take a moment to read the output.** The assistant will give you a summary of the project structure, patterns, conventions, and recent changes. Does it match your understanding from Exercises 1 and 2? If something looks off or incomplete, ask follow-up questions before moving on.
@@ -23,7 +23,7 @@ Run the **`/prime`** command ([`.agents/commands/prime.md`](../../.agents/comman
 
 ## Step 2 — Create the plan
 
-Now run the **`/plan`** command ([`.agents/commands/plan.md`](../../.agents/commands/plan.md)). Same approach as `/prime` — in Cursor, use `@` to select the file; in other assistants, copy its content into the chat. Give it a job name (e.g. `catalog-filters-ex3`) and the feature specs below.
+Now run the **`/plan`** command ([`.cursor/commands/plan.md`](../../.cursor/commands/plan.md)). Same approach as `/prime` — in Cursor, use `@` to select the file; in other assistants, copy its content into the chat. Give it a job name (e.g. `catalog-filters-ex3`) and the feature specs below.
 
 The command will:
 1. Analyze the codebase in depth
@@ -102,7 +102,7 @@ If something looks off, tell the assistant. Ask it to revise the plan. The plan 
 
 ## Step 3 — Implement
 
-Once you are satisfied with the plan, run the **`/implement`** command ([`.agents/commands/implement.md`](../../.agents/commands/implement.md)) the same way. Point it to your job (e.g. `catalog-filters-ex3`).
+Once you are satisfied with the plan, run the **`/implement`** command ([`.cursor/commands/implement.md`](../../.cursor/commands/implement.md)) the same way. Point it to your job (e.g. `catalog-filters-ex3`).
 
 The command will:
 1. Read the full plan

@@ -2,7 +2,7 @@
 
 **Audience:** Humans and agents **editing** project rules—not a substitute for reading the rules themselves.
 
-Committed location: **`.agents/rules/`** (same folder as this file).
+Committed location: **`.cursor/rules/`** (same folder as this file).
 
 ## SSOT per file
 

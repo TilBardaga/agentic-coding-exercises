@@ -76,7 +76,7 @@ Verify the app loads at http://localhost:3000 before moving on.
 
 ## Step 2 — Understand the agent commands
 
-Before you start using the commands, it helps to know what they do and why they exist. Each command is a markdown file in `.agents/commands/` that contains detailed instructions for the AI. You do not need to read the full files — here is what each one does:
+Before you start using the commands, it helps to know what they do and why they exist. Each command is a markdown file in `.cursor/commands/` that contains detailed instructions for the AI. You do not need to read the full files — here is what each one does:
 
 ### The technical cycle (you will use these in every part)
 
@@ -99,7 +99,7 @@ Before you start using the commands, it helps to know what they do and why they 
 
 The commands are markdown files. You feed them to your AI assistant:
 
-- **Cursor:** Type `@` in the chat input, navigate to `.agents/commands/prime.md` (or whichever command), select it, and press Enter. The assistant reads the file and follows its instructions.
+- **Cursor:** Type `@` in the chat input, navigate to `.cursor/commands/prime.md` (or whichever command), select it, and press Enter. The assistant reads the file and follows its instructions.
 - **Other assistants:** Open the command file, copy its content into your chat, and let the assistant execute it.
 
 Some commands need input (a job name, a path). The task files for each part will tell you exactly what to provide.
@@ -163,7 +163,7 @@ exercise-3/
 Folders outside `exercise-3/` that you will use:
 
 ```
-.agents/
+.cursor/
 ├── commands/              ← the agent command files (do not modify)
 │   ├── prime.md
 │   ├── plan.md
@@ -184,17 +184,17 @@ docs/agent-jobs/           ← where commands write their output
 
 ### Command definitions
 
-The full command definitions live in `.agents/commands/`. You do not need to read them to use them — the task files tell you what to do — but if you are curious about what the AI is being told, they are there.
+The full command definitions live in `.cursor/commands/`. You do not need to read them to use them — the task files tell you what to do — but if you are curious about what the AI is being told, they are there.
 
 | Command | File |
 |---------|------|
-| `/prime` | [`.agents/commands/prime.md`](../.agents/commands/prime.md) |
-| `/plan` | [`.agents/commands/plan.md`](../.agents/commands/plan.md) |
-| `/implement` | [`.agents/commands/implement.md`](../.agents/commands/implement.md) |
-| `/code-review` | [`.agents/commands/code-review.md`](../.agents/commands/code-review.md) |
-| `/code-review-fix` | [`.agents/commands/code-review-fix.md`](../.agents/commands/code-review-fix.md) |
-| `/execution-report` | [`.agents/commands/execution-report.md`](../.agents/commands/execution-report.md) |
-| `/system-review` | [`.agents/commands/system-review.md`](../.agents/commands/system-review.md) |
+| `/prime` | [`.cursor/commands/prime.md`](../.cursor/commands/prime.md) |
+| `/plan` | [`.cursor/commands/plan.md`](../.cursor/commands/plan.md) |
+| `/implement` | [`.cursor/commands/implement.md`](../.cursor/commands/implement.md) |
+| `/code-review` | [`.cursor/commands/code-review.md`](../.cursor/commands/code-review.md) |
+| `/code-review-fix` | [`.cursor/commands/code-review-fix.md`](../.cursor/commands/code-review-fix.md) |
+| `/execution-report` | [`.cursor/commands/execution-report.md`](../.cursor/commands/execution-report.md) |
+| `/system-review` | [`.cursor/commands/system-review.md`](../.cursor/commands/system-review.md) |
 
 Commands not used in this workshop: `/finish` (commit) and `/push` (publish). These exist for use in your own projects after the training.
 

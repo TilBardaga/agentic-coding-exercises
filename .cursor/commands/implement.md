@@ -42,7 +42,7 @@ Use the **Implementation checklist** as the **only** task list. Toggle `- [ ]` �
 - Touch **only** files and scope the plan describes.
 - Apply project conventions from rules and existing code.
 
-**Documentation:** Complete every **`Doc:`** item in the **Implementation checklist** (and any **Documentation impact** section in **`dev-plan.md`**) in the **same** change set as the code—do not defer a separate “doc-only” pass unless the user agrees. When scope includes **Exercise 3**, follow **`.agents/rules/06-workshop-exercise-3-documentation.mdc`** and **`exercise-3/docs/DOC_INDEX.md`**.
+**Documentation:** Complete every **`Doc:`** item in the **Implementation checklist** (and any **Documentation impact** section in **`dev-plan.md`**) in the **same** change set as the code—do not defer a separate “doc-only” pass unless the user agrees. When scope includes **Exercise 3**, follow **`.cursor/rules/06-workshop-exercise-3-documentation.mdc`** and **`exercise-3/docs/DOC_INDEX.md`**.
 
 **Unexpected situations:** If something **not covered** by the plan appears (wrong paths, missing modules, failed assumptions, dependency/API drift, contradictory tests): **stop** changing product code (short read-only investigation is fine). Do a **brief, targeted** look (named files, one focused search). Then **tell the user** what you found, why it blocks following the plan as written, and give **2–3 logical options** (e.g. revise `dev-plan.md`, narrow scope, time-boxed spike). **Do not** improvise large scope changes without user choice.
 
@@ -50,7 +50,7 @@ Use the **Implementation checklist** as the **only** task list. Toggle `- [ ]` �
 
 - Run every validation command the plan lists (lint, tests, typecheck, etc.).
 - If the plan omits commands, run the **standard** checks documented in this repo’s README or configs (state what you ran).
-- **Project health (skill):** When the plan includes **PROJECT HEALTH** or the change touches **`app/backend`** / **`app/frontend`** (under any parent), follow **`.agents/skills/check-project-health/SKILL.md`** in **Implementation mode**: discover roots, run the checks there (and any extra commands the plan’s **PROJECT HEALTH** section lists—**the plan wins** when more specific). If checks fail, apply **simple fixes** allowed by the skill, **re-run**, and repeat until all required checks **PASS** or you hit a **non-simple** failure—then stop and use the same escalation style as **Unexpected situations** in Step 2.
+- **Project health (skill):** When the plan includes **PROJECT HEALTH** or the change touches **`app/backend`** / **`app/frontend`** (under any parent), follow **`.cursor/skills/check-project-health/SKILL.md`** in **Implementation mode**: discover roots, run the checks there (and any extra commands the plan’s **PROJECT HEALTH** section lists—**the plan wins** when more specific). If checks fail, apply **simple fixes** allowed by the skill, **re-run**, and repeat until all required checks **PASS** or you hit a **non-simple** failure—then stop and use the same escalation style as **Unexpected situations** in Step 2.
 - If the job is **docs/rules only** and no app trees are in scope, skip the skill unless **PROJECT HEALTH** or the user requires it.
 
 ## Step 4 — Handover
