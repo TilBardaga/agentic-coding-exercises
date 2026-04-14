@@ -23,13 +23,7 @@ You will build the **same feature** three times: product catalog filtering for a
 
 ### 1. Install required tools
 
-Follow **[`setup/README.md`](setup/README.md)** to install Python, uv, Node.js, Bun, and Git.
-
-The setup guide offers two approaches:
-- **Option A — AI-first:** Paste a prompt into your AI assistant and let it install everything for you. This is a great warm-up for the workshop.
-- **Option B — Manual:** Follow traditional step-by-step instructions for each tool.
-
-Both get you to the same place. Pick whichever you prefer.
+Follow **[`PREPARATION.md`](PREPARATION.md)** to install Cursor, Python, uv, Node.js, Bun, Git, and pre-download all dependencies. The preparation guide covers everything you need in one document.
 
 ### 2. Verify everything works
 
@@ -267,8 +261,8 @@ Commands not used in this workshop: `/finish` (commit) and `/push` (publish). Th
 
 | Problem | Fix |
 |---------|-----|
-| `bun: command not found` | Install Bun — see [`setup/README.md`](setup/README.md) step 4 |
-| `uv: command not found` | Install uv — see [`setup/README.md`](setup/README.md) step 2 |
+| `bun: command not found` | Install Bun — see [`PREPARATION.md`](PREPARATION.md) step 3 |
+| `uv: command not found` | Install uv — see [`PREPARATION.md`](PREPARATION.md) step 3 |
 | Backend won't start | Make sure you ran `uv venv --python 3.12` and `uv sync` first |
 | Frontend won't start | Make sure you ran `bun install` first |
 | Tests fail before you changed anything | Run `uv run pytest` from the exercise's `app/backend/` folder — the filtering tests are **skipped** by default, that is expected |

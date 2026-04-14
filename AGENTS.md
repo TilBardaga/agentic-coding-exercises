@@ -27,4 +27,4 @@ Use **`/plan`** and an approved **`dev-plan.md`** before **substantive**, multi-
 
 After meaningful code changes, follow **`.agents/skills/check-project-health/SKILL.md`** (Implementation mode when executing a plan) to discover and run the right **`uv` / `pytest` / `ruff`** and **`bun`** checks for the app roots you touched — not a single global command from repo root.
 
-**Tooling setup (new machine):** **[`setup/README.md`](setup/README.md)**.
+**Tooling setup (new machine):** **[`PREPARATION.md`](PREPARATION.md)** (steps 1–4).
