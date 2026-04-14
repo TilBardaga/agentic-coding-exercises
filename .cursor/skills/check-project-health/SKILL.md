@@ -106,7 +106,7 @@ Then `curl` `/`, `/docs` as appropriate; stop process on Unix with `lsof`/`kill`
 
 ### Docs-only jobs
 
-If changes are only **`docs/`**, **`.agents/`**, **`docs/agent-jobs/`**, skip app commands unless the plan requires them.
+If changes are only **`docs/`**, **`.cursor/`**, **`docs/agent-jobs/`**, skip app commands unless the plan requires them.
 
 ## Execution order (full pass)
 

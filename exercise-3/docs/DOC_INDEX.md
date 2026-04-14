@@ -9,7 +9,7 @@ Single-screen **hub** for navigation docs and where to record changes. Normative
 | **Codebase map** (where things live) | [`CODEBASE_MAP.md`](CODEBASE_MAP.md) |
 | **Architecture** (flow + boundaries) | [`ARCHITECTURE.md`](ARCHITECTURE.md) |
 | **Changelog** (what shipped) | [`../CHANGELOG.md`](../CHANGELOG.md) |
-| **Agent commands** (workshop) | [`.agents/commands/`](../../.agents/commands/) (from repo root: `agentic-coding-exercises/.agents/commands/`) |
+| **Agent commands** (workshop) | [`.cursor/commands/`](../../.cursor/commands/) (from repo root: `agentic-coding-exercises/.cursor/commands/`) |
 | **Job artifacts** (`dev-plan.md`, reviews) | [`docs/agent-jobs/`](../../docs/agent-jobs/README.md) |
 
 ## When to update (lightweight SSOT)

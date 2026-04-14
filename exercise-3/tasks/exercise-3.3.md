@@ -10,7 +10,7 @@ This is the meta layer: what did you plan vs. what actually happened? Where did 
 
 ## Step 1 — Execution report
 
-Run the **`/execution-report`** command ([`.agents/commands/execution-report.md`](../../.agents/commands/execution-report.md)). Point it to your job folder (e.g. `catalog-filters-ex3`).
+Run the **`/execution-report`** command ([`.cursor/commands/execution-report.md`](../../.cursor/commands/execution-report.md)). Point it to your job folder (e.g. `catalog-filters-ex3`).
 
 The command compares your `dev-plan.md` to what actually happened during 3.1 and 3.2. It documents:
 - What shipped vs. what was planned
@@ -32,7 +32,7 @@ The command compares your `dev-plan.md` to what actually happened during 3.1 and
 
 ## Step 2 — System review
 
-Run the **`/system-review`** command ([`.agents/commands/system-review.md`](../../.agents/commands/system-review.md)). Same job folder.
+Run the **`/system-review`** command ([`.cursor/commands/system-review.md`](../../.cursor/commands/system-review.md)). Same job folder.
 
 This command goes one level deeper than the execution report. It is not about what happened — it is about _why_ it happened and what to improve in the workflow itself. The command will:
 
@@ -51,7 +51,7 @@ This command goes one level deeper than the execution report. It is not about wh
 The system review probably proposed several improvements to the workflow. Pick **at most 2** small, concrete edits to apply now. These can be:
 
 - A small update to [`AGENTS.md`](../../AGENTS.md)
-- A tweak to a rule in [`.agents/rules/`](../../.agents/rules/)
+- A tweak to a rule in [`.cursor/rules/`](../../.cursor/rules/)
 - A minor edit to one command file
 
 The key word is **bounded** — no full rewrites, no big restructuring. If the system review suggests more than two changes, keep the rest as proposals in `system-review.md` for future reference.

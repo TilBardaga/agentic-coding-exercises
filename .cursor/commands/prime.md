@@ -54,7 +54,7 @@ From config files that **exist** (e.g. `pyproject.toml`, `package.json`, `Makefi
 
 ### 4. Rules and conventions
 
-- If `AGENTS.md` (or other project rule files, e.g. under `.agents/rules` if present) exists, note where Layer-1 guidance lives and one-line what it emphasizes.
+- If `AGENTS.md` (or other project rule files, e.g. under `.cursor/rules` if present) exists, note where Layer-1 guidance lives and one-line what it emphasizes.
 - Otherwise: state that rules are chat-only or exercise-local.
 
 ### 5. Git history and working tree

@@ -26,7 +26,7 @@ If unsure whether something is intentional, **ask** instead of deleting.
 
 ### 2. Validation (if the repo defines it)
 
-- Prefer following **`.agents/skills/check-project-health/SKILL.md`** (**Advisory mode**: report-first unless you already asked to fix) for a structured pass, **or** manually check root **`README.md`**, **`AGENTS.md`**, and **`package.json` / `pyproject.toml` / `Makefile`** for documented lint, test, or typecheck commands.
+- Prefer following **`.cursor/skills/check-project-health/SKILL.md`** (**Advisory mode**: report-first unless you already asked to fix) for a structured pass, **or** manually check root **`README.md`**, **`AGENTS.md`**, and **`package.json` / `pyproject.toml` / `Makefile`** for documented lint, test, or typecheck commands.
 - Run **what this repo documents** (nothing invented). If there is no standard check, skip and say so.
 
 If validation fails, fix in scope or stop with a clear blocker—**do not commit broken checks** the project already enforces.

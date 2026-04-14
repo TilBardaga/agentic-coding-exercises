@@ -7,7 +7,7 @@ alwaysApply: true
 
 **Normative content lives only in the numbered `NN-workshop-*.mdc` files below**—not in this index. Open the file that matches **what you are editing**.
 
-Rules are committed under **`.agents/rules/`**. Some editors only auto-attach `.mdc` files from a `.cursor/rules/` tree—use **`@`-references** to these files or a **local symlink/copy** if you need native rule attachment.
+Rules are committed under **`.cursor/rules/`**. Some editors only auto-attach `.mdc` files from a `.cursor/rules/` tree—use **`@`-references** to these files or a **local symlink/copy** if you need native rule attachment.
 
 ## Glob reference (workshop tree)
 
@@ -19,7 +19,7 @@ Rules target demo apps under any **`exercise-*/app/`** (and the same pattern els
 | Backend tests  | `**/app/backend/tests/**/*.py`, `**/app/backend/tests/conftest.py`                                                                         |
 | Frontend       | `**/app/frontend/**/*.ts`, `**/app/frontend/**/*.tsx`, `**/app/frontend/**/*.css`, `**/app/frontend/package.json`, `**/app/frontend/.env*` |
 
-**IDE note:** After adding rules, spot-check that editing e.g. `exercise-1/app/backend/app/main.py` and `exercise-1/app/frontend/src/App.tsx` attaches the expected rule set (or that `@.agents/rules/` gives the right context).
+**IDE note:** After adding rules, spot-check that editing e.g. `exercise-1/app/backend/app/main.py` and `exercise-1/app/frontend/src/App.tsx` attaches the expected rule set (or that `@.cursor/rules/` gives the right context).
 
 **File count:** **Six** rule files (**`06`** is Exercise 3 navigation docs; frontend security and env are folded into **`04`**).
 

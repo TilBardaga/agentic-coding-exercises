@@ -1,6 +1,6 @@
-# `.agents` — workshop command library
+# `.cursor` — workshop command library
 
-This folder holds **command definitions** and **scoped rules** for this repo’s agentic workflows. **Layer 1 coding norms** live under **[`rules/`](rules/INDEX.mdc)** (same `.agents/` tree) and **[`AGENTS.md`](../AGENTS.md)** at the repo root—invoke those when editing exercise app code; use **`commands/`** and **`skills/`** for PIV workflows.
+This folder holds **command definitions** and **scoped rules** for this repo’s agentic workflows. **Layer 1 coding norms** live under **[`rules/`](rules/INDEX.mdc)** (same `.cursor/` tree) and **[`AGENTS.md`](../AGENTS.md)** at the repo root—invoke those when editing exercise app code; use **`commands/`** and **`skills/`** for PIV workflows.
 
 ## Core PIV commands
 

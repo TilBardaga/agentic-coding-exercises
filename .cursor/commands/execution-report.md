@@ -24,7 +24,7 @@ Resolve the **job directory** `docs/agent-jobs/<job-name>/` (same folder as `dev
 
 Write **`docs/agent-jobs/<job-name>/execution-report.md`** (overwrite if it already exists for this run).
 
-Do **not** write under `.agents/` for this report—the job folder is the SSOT for plan + implementation artifacts.
+Do **not** write under `.cursor/` for this report—the job folder is the SSOT for plan + implementation artifacts.
 
 ## Context to capture
 

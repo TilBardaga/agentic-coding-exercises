@@ -17,7 +17,7 @@ Before you can use the agent commands, you need to bring them into your project.
 **Option A — Copy the commands into your repo:**
 
 ```
-Copy the .agents/ folder from this workshop into your own project.
+Copy the .cursor/ folder from this workshop into your own project.
 The commands (prime, plan, implement, code-review, etc.) are generic —
 they work on any codebase. You may want to update the rules/ files
 to match your project's conventions.
@@ -213,7 +213,7 @@ Debugging a bad implementation takes longer than reviewing a good plan. Edge cas
 
 ### The workshop commands
 
-The agent commands from this workshop are in `.agents/commands/`. They are not proprietary — they are markdown files that instruct any AI assistant. You can:
+The agent commands from this workshop are in `.cursor/commands/`. They are not proprietary — they are markdown files that instruct any AI assistant. You can:
 
 - **Copy them into your projects** and adapt the rules to your conventions
 - **Use them as templates** for writing your own commands
@@ -234,7 +234,7 @@ This is not a tool or a product. It is a habit. It works with any AI assistant, 
 If you want to explore agentic coding further:
 
 - **Custom commands** — Write your own commands for workflows specific to your team. `/deploy-check`, `/migration-plan`, `/onboard-to-module` — anything you do repeatedly can be codified.
-- **Rules files** — The `.agents/rules/` folder contains coding conventions that the AI follows automatically. Writing rules for your own project is one of the highest-leverage things you can do — it means the AI follows your conventions without you repeating them in every prompt.
+- **Rules files** — The `.cursor/rules/` folder contains coding conventions that the AI follows automatically. Writing rules for your own project is one of the highest-leverage things you can do — it means the AI follows your conventions without you repeating them in every prompt.
 - **Multi-agent workflows** — Some tasks benefit from separate AI sessions for different concerns: one for planning, one for implementation, one for review. The same principle as code review — a fresh perspective catches what familiarity misses.
 
 ---
