@@ -40,10 +40,10 @@ We will be using **Cursor** as our AI coding assistant during the workshop.
 All exercises, instructions, and agent commands live in one repo. Clone the **cursor** branch — this is the version optimized for Cursor:
 
 ```bash
-git clone -b cursor https://github.com/TilBardaga/agentic-coding-exercises.git
+git clone https://github.com/TilBardaga/agentic-coding-exercises.git
 ```
 
-Open the cloned folder in Cursor. You should see exercise folders (`exercise-1/` through `exercise-4/`), a `.cursor/` folder with agent commands, and this preparation guide.
+Open the cloned folder in Cursor. You should see exercise folders (`exercise-1/` through `exercise-4/`), a `.agents/` folder with agent commands, and this preparation guide.
 
 ---
 
@@ -255,7 +255,7 @@ If you want to hit the ground running, you can browse the workshop materials bef
 
 - **[`README.md`](README.md)** — The main workshop guide. Explains the structure, how exercises connect, and what you will build.
 - **[`exercise-1/README.md`](exercise-1/README.md)** — The first exercise. Reading it gives you a feel for what the assignments look like.
-- **[`.cursor/commands/`](.cursor/commands/)** — The agent command files used in Exercise 3. These are markdown files that instruct Cursor how to plan, implement, and review code. Browsing them gives you a sense of what "operationalized AI workflow" looks like in practice.
+- **[`.agents/commands/`](.agents/commands/)** — The agent command files used in Exercise 3. These are markdown files that instruct Cursor how to plan, implement, and review code. Browsing them gives you a sense of what "operationalized AI workflow" looks like in practice.
 
 Do not worry about understanding everything — the exercises are designed to guide you step by step.
 
@@ -287,7 +287,7 @@ The workshop is interactive — we will be sharing screens, discussing approache
 Before the workshop starts, make sure you can check all of these:
 
 - [ ] Cursor installed and logged in (AI chat works)
-- [ ] Repo cloned — `git clone -b cursor https://github.com/TilBardaga/agentic-coding-exercises.git`
+- [ ] Repo cloned — `git clone https://github.com/TilBardaga/agentic-coding-exercises.git`
 - [ ] Tools installed — `python3`, `uv`, `node`, `bun`, `git` all print a version number
 - [ ] Dependencies pre-installed — `uv sync` and `bun install` done for exercises 1–3
 - [ ] Own project ready for Exercise 4 (builds, starts, and runs)
