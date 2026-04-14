@@ -33,7 +33,3 @@ Cursor’s slash menu normally loads from **`.cursor/commands/`** only. In this 
 
 - **`commands/`** (review & retro) — **`/code-review`**, **`/code-review-fix`**, **`/execution-report`**, **`/system-review`**. Artifacts go next to **`dev-plan.md`** under **`docs/agent-jobs/<job>/`** (see **[`exercise-3/README.md`](../exercise-3/README.md)** §3.2–3.3).
 - **`skills/check-project-health/`** — Discovery + checks + (in **Implementation mode**) simple-fix loop until green; **`/plan`** and **`/implement`** tell the agent when to run it; **`/finish`** may use **Advisory mode** for a pre-commit pass.
-
-## Legacy template folder
-
-**`.agents-template/`** (if present) is an optional upstream-style bundle—extra commands, reference notes, PRD template. **`/.agents`** in this repo is the slim workshop set actually in use.

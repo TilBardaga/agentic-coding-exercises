@@ -1,117 +1,140 @@
 # Exercise 3.4 — Repository abstraction (backend)
 
-**Prerequisite:** **[`exercise-3.1.md`](exercise-3.1.md)** and **[`exercise-3.2.md`](exercise-3.2.md)** are done: **filtering** works end-to-end. This step is a **refactor in place**—behavior and tests stay the same; structure improves.
+In 3.1 through 3.3 you built filtering, reviewed it, and reflected on the process. Now you are going to refactor the backend — without changing what it does.
 
-**Command index:** [`../README.md`](../README.md).
+The goal is to introduce a **repository layer** that separates _how products are loaded_ from _what you do with them_. Right now, the product data and the filtering logic probably live in the same place. That works for a small app, but in a real codebase it is a code smell — it couples your business rules to your data source, which means you cannot swap one without rewriting the other.
 
-**Assistant session:** **New chat** (do not continue the 3.1–3.3 thread). Run this refactor’s **full technical cycle** in this chat: **`/prime`** first, then **`/plan` → `/implement` → `/code-review` → `/code-review-fix`**. **`/execution-report`** and **`/system-review`** are **optional**; keep them in this same chat if you use them. **3.5** → **another new chat**. See **[`../README.md` § Chat / assistant sessions](../README.md#chat--assistant-sessions)**.
+**Start a new chat session.** This is a separate piece of work — do not continue from the 3.1–3.3 thread. The assistant needs a clean context for this refactor.
 
-**Workshop workflow (this step):** Follow **[`../README.md` § Suggested agent workflow](../README.md#suggested-agent-workflow)**. For **3.4** you must run at least **`/prime` → `/plan` → `/implement` → `/code-review` → `/code-review-fix`**. **`/execution-report`** and **`/system-review`** are **optional** here (you already did a full retro in **3.3**); use them if you want another process pass on this refactor. **`/finish`** and **`/push`** are **out of scope** for this workshop repo.
-
----
-
-## Why a repository layer?
-
-Today, product data and filtering logic often share the same module: a **module-level list** holds data; the **service** reads and filters it directly. That is fine for a workshop seed, but it **couples** “how we fetch rows” to “what we do with products.”
-
-A **repository** is the seam where **persistence** lives:
-
-- **Service** = business rules (filtering, sorting, validation of domain invariants).
-- **Repository** = how products are **loaded and stored** (in-memory list now; a database later).
-
-Benefits you should be able to explain after this exercise:
-
-- **Swap storage** (e.g. SQLite/Postgres) without rewriting filtering rules in the service.
-- **Test the service** with a **fake or in-memory repository** instead of touching global state.
-- **One place** that knows about `get_seed_products()` or any future connection string.
+**Code location:** [`../app/backend/`](../app/backend/)
 
 ---
 
-## What you build
+## What you are building
 
-### 1. `ProductRepository` (contract)
+This is a **refactor** — behavior stays the same, tests stay green, but the structure improves. You are introducing a clean seam between two concerns:
 
-Define a **`typing.Protocol`** (preferred) or an **ABC** that describes what the **service** needs. After **3.1**, that is **not** only `get_all_products()`—it must include whatever the service uses for **filtered** access, for example:
+- **Service** = business rules. Filtering, sorting, validation — the _what_ you do with products.
+- **Repository** = data access. Loading products, storing products — the _how_ you get them.
 
-- A method that returns products matching filter criteria (query object, separate args, or a small **criteria** model—match what you already have in `product_service` and the API).
-- Names and signatures should mirror your **current** service API so the refactor is mostly **moving** code, not redesigning behavior.
+### The pieces
 
-Keep the protocol **narrow**: only methods the service actually calls.
+**1. `ProductRepository` (contract)** — A `typing.Protocol` (preferred) or ABC that defines what the service needs from data access. Keep it narrow: only methods the service actually calls. The names and signatures should mirror your current service API so the refactor is mostly _moving_ code, not redesigning it.
 
-### 2. `InMemoryProductRepository` (implementation)
+**2. `InMemoryProductRepository` (implementation)** — Implements the protocol using the in-memory product list. This is the single place that calls `get_seed_products()` — no other module should know where the initial data comes from. No database, no ORM, no async I/O.
 
-- Holds the **in-memory** list (the data that today lives in `_PRODUCTS_DATABASE` or equivalent).
-- **Single place** that calls **`get_seed_products()`** (or builds the initial list).
-- Implements every method on **`ProductRepository`**.
+**3. `product_service` (consumer)** — Rewire the service to use a `ProductRepository` instance instead of directly accessing a global product list. Filtering and sorting logic can stay in the service or move to the repository — pick one approach and be consistent. The workshop default: keep business rules in the service, let the repository handle loading and raw data access.
 
-No real database, no ORM, no async I/O in this exercise.
+**4. Wiring** — Choose how the repository gets into the service:
+- **Module-level default:** `_repo: ProductRepository = InMemoryProductRepository()` — simple, good for a small API
+- **FastAPI `Depends()`:** Inject it — easier to swap in tests via dependency overrides
 
-### 3. `product_service` (consumer)
+Either is valid. Document your choice in [`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md).
 
-- **No** direct reads of a global product list for “the catalog.”
-- All data access goes through an instance of **`ProductRepository`** (passed in or resolved as below).
-- **Filtering / sorting** logic can stay in the service **or** move into the repository—**pick one** approach and document it in [`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md) (one short paragraph). Workshop default: **keep business rules in the service**, repository returns **raw or lightly filtered** lists **only** if you already structured it that way; otherwise repository = “list + load” and service keeps filter rules—**consistency beats dogma**.
+**5. API layer** — Routers stay thin. They delegate to the service, not the repository (unless you chose `Depends` at the router level for wiring — then only the wiring lives there).
 
-### 4. Wiring (choose one pattern)
+### Why this matters
 
-Document the choice in **`docs/ARCHITECTURE.md`**:
+After this refactor, you can:
+- **Swap storage** (SQLite, Postgres) without rewriting your filtering logic
+- **Test the service** with a fake repository instead of touching global state
+- **Find data access code** in one place, not scattered across modules
 
-| Pattern                  | When it fits                                                                                                           |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| **Module-level default** | e.g. `_repo: ProductRepository = InMemoryProductRepository()` set once; functions use `_repo`. Simple for a small API. |
-| **FastAPI `Depends()`**  | Inject a repository provider into the router or a service factory; easier to swap in tests via dependency overrides.   |
-
-Either is valid; **do not** leave multiple hidden globals for the same data.
-
-### 5. API layer
-
-**Routers** should stay thin: they already delegate to **`product_service`**. After the refactor, they must **not** import the repository directly unless you chose **Depends** at the router—then only wiring lives there.
+These are not hypothetical benefits — they are the difference between a codebase that scales and one that turns into spaghetti as it grows.
 
 ---
 
-## Suggested migration order
+## Step 1 — Prime
 
-1. **Prime** — refresh layout under `app/backend` (where service, data, API live).
-2. **Plan** — new job folder under `docs/agent-jobs/` (e.g. `repo-abstraction-ex3`); phases: introduce protocol → implement in-memory → rewire service → run tests.
-3. **Implement** — tick the plan; keep **pytest** green after each meaningful chunk.
-4. **Code review** + **code review fix** — same job folder as this refactor’s plan/artifacts (or the folder your facilitator specifies).
-5. **(Optional)** **Execution report** + **system review** — if you want to practice the meta loop again on this change set.
+Start your new chat by running **`/prime`** with a focus on the backend:
 
----
+- Focus on `exercise-3/app/backend` — specifically the service, data, and API layers
 
-## Testing and validation
-
-- **`uv run pytest`** for **`app/backend`** — **all** tests, including filtering tests, must pass.
-- Optionally add **one** test that uses a **fake** repository (not required).
-- Run **[`check-project-health`](../../.agents/skills/check-project-health/SKILL.md)** (or `ruff` + `pytest`) on the backend root you changed.
+Read the output. You already know this codebase from 3.1, but the assistant in this new chat does not. Make sure it has an accurate picture of the current state — including the changes you made in 3.1 and 3.2.
 
 ---
 
-## Docs
+## Step 2 — Plan
 
-- **[`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md):** repository + service boundary; wiring pattern (`Depends` vs module).
-- **[`docs/CODEBASE_MAP.md`](../docs/CODEBASE_MAP.md):** file path(s) for `ProductRepository` / `InMemoryProductRepository`.
-- **[`CHANGELOG.md`](../CHANGELOG.md):** short entry under **[Unreleased]** for this refactor.
+Run **`/plan`** with a new job name (e.g. `repo-abstraction-ex3`). Describe the refactor using the requirements above.
+
+The plan should cover:
+- Introduce the protocol
+- Implement the in-memory repository
+- Rewire the service
+- Update the wiring
+- Run tests after each meaningful step
+
+### Review the plan
+
+This is a refactor — the risk is breaking something that currently works. Read the plan carefully:
+
+- **Does it preserve existing behavior?** The tests should pass at every step, not just at the end. If the plan has a step where tests _would_ break temporarily, that is a red flag.
+- **Is the migration path clean?** You should be able to introduce the repository alongside the existing code, wire it up, and then remove the old approach — not rip everything apart at once.
+- **Is the protocol narrow enough?** If it has methods the service does not actually call, push back. Unnecessary abstraction is its own form of technical debt.
+
+---
+
+## Step 3 — Implement
+
+Run **`/implement`**. The command will follow the plan and keep tests green after each phase.
+
+Since this is a refactor, the validation is straightforward: **the tests that were passing before must still pass after.** No new behavior, no new edge cases — just cleaner structure.
+
+> **This is a good test of the workflow.** Refactoring is where bad process hurts most — you are changing the internals of working code, and every mistake is a regression. If the plan is solid and the implementation follows it, the tests stay green throughout. If they break, you know immediately where the process failed.
+
+---
+
+## Step 4 — Code review and fix
+
+Run **`/code-review`** followed by **`/code-review-fix`**, both in the same job folder.
+
+For a refactor, pay extra attention to:
+- **Leftover references** to the old global product list — if the service still imports it directly somewhere, the refactor is incomplete
+- **Leaky abstractions** — does the repository expose implementation details that the service should not know about?
+- **Unnecessary complexity** — did the refactor introduce more indirection than needed? A repository layer should simplify, not complicate
+
+---
+
+## Step 5 — Validate and document
+
+**Run the tests:**
+
+```bash
+cd app/backend
+uv run pytest
+```
+
+All tests — including the filtering tests from 3.1 — must pass. If any test broke, the refactor changed behavior, which means something went wrong.
+
+**Update the docs:**
+
+- **[`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md)** — Document the repository + service boundary and your wiring choice
+- **[`docs/CODEBASE_MAP.md`](../docs/CODEBASE_MAP.md)** — Add the file paths for `ProductRepository` and `InMemoryProductRepository`
+- **[`CHANGELOG.md`](../CHANGELOG.md)** — Short entry under `[Unreleased]`
+
+**Optional:** Run `/execution-report` and `/system-review` if you want another round of process reflection. Not required — you already did a full meta cycle in 3.3.
 
 ---
 
 ## Out of scope
 
-- Real SQL/ORM, migrations, connection pools.
-- Async database drivers, full DDD, event sourcing.
-- Changing **HTTP** contracts or **frontend** behavior (unless a tiny fix is required for green tests).
+- Real SQL/ORM, migrations, connection pools
+- Async database drivers, full DDD, event sourcing
+- Changing HTTP contracts or frontend behavior
+
+This is a backend refactor only. If the frontend breaks, something went wrong.
 
 ---
 
-## Done when
+## Done?
 
-- [ ] **`ProductRepository`** + **`InMemoryProductRepository`** exist; **service** has **no** ad hoc global list access for catalog data.
-- [ ] **`uv run pytest`** passes for **`exercise-3/app/backend`**.
-- [ ] **Architecture** (and map or changelog) updated.
-- [ ] You completed at least **`/prime` → `/plan` → `/implement` → `/code-review` → `/code-review-fix`** for this work.
+- [ ] `ProductRepository` and `InMemoryProductRepository` exist
+- [ ] The service uses the repository — no direct access to global product lists
+- [ ] `uv run pytest` passes for `exercise-3/app/backend`
+- [ ] Architecture docs and changelog updated
+- [ ] Completed `/prime` → `/plan` → `/implement` → `/code-review` → `/code-review-fix`
 
----
+**Quick reflection:** This was a refactor — no new functionality, just better structure. Was the agent workflow overkill for this, or did it catch things you would have missed? Would you use `/code-review` on refactors in your own projects?
 
-## Next
-
-**[`exercise-3.5.md`](exercise-3.5.md)** (free feature).
+**Next: [Exercise 3.5 — Free feature](exercise-3.5.md).** Start another **new chat session**.

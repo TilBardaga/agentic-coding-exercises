@@ -12,7 +12,7 @@ Normative coding and architecture guidance lives in **`.agents/rules/`** — not
 - **Mission control:** **[`README.md`](README.md)** — exercise order (**1 → 2 → 3**), layout, and where assignments live. For **Exercise 3** navigation docs, use **[`exercise-3/docs/DOC_INDEX.md`](exercise-3/docs/DOC_INDEX.md)**; learner-visible shipping notes go in **[`exercise-3/CHANGELOG.md`](exercise-3/CHANGELOG.md)**.
 - **The Map:** **[`.agents/rules/INDEX.mdc`](.agents/rules/INDEX.mdc)** — which numbered rule file to open (**routing only**; the index is not the full rule text).
 - **The Laws:** **`01`–`06`** `*-workshop-*.mdc` in **`.agents/rules/`** — backend/frontend exercise apps (**`01`–`05`**) and **Exercise 3** documentation discipline (**`06`**). Maintainer expectations: **[`.agents/rules/README.md`](.agents/rules/README.md)**.
-- **Repo shape:** Demo apps under **`exercise-*/app/backend/`** (FastAPI, **uv**) and **`exercise-*/app/frontend/`** (Bun, React). This **public** tree is the **1 → 2 → 3** learner path only.
+- **Repo shape:** Demo apps under **`exercise-*/app/backend/`** (FastAPI, **uv**) and **`exercise-*/app/frontend/`** (Bun, React).
 
 ## 2. Project governance & session memory
 

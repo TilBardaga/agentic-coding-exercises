@@ -1,38 +1,90 @@
-# Exercise 3.3 — Execution report, system review, and repo meta
+# Exercise 3.3 — Execution report, system review, and docs
 
-**Prerequisite:** **[`exercise-3.2.md`](exercise-3.2.md)** complete.
+This is the final part of the 3.1–3.3 flow. You have built a feature, reviewed it, and fixed the findings. Now you step back and look at the _process_ — not the code.
 
-**Command index:** [`../README.md`](../README.md).
+This is the meta layer: what did you plan vs. what actually happened? Where did the process help, and where did it get in the way? What would you change for next time?
 
-**Assistant session:** Finish **3.1–3.3** in this **same** chat. **Start a new chat** when you begin **3.4**. See **[`../README.md` § Chat / assistant sessions](../README.md#chat--assistant-sessions)**.
-
-**Workshop workflow:** This is the **meta** segment of the full cycle: **`/execution-report`** and **`/system-review`** (steps 6–7 in **[`../README.md` § Suggested agent workflow](../README.md#suggested-agent-workflow)**). **`/finish`** and **`/push`** are **out of scope** here.
+**Stay in the same chat** as 3.1 and 3.2. This is the last part in this session — after this, you will start a new chat for 3.4.
 
 ---
 
-## Goal
+## Step 1 — Execution report
 
-Reflect **plan vs reality**, improve **process** in a **bounded** way, and maintain **lightweight** navigation docs: **`exercise-3/docs/`** (map, architecture, hub) plus **[`CHANGELOG.md`](../CHANGELOG.md)** at the exercise root.
+Run the **`/execution-report`** command ([`.agents/commands/execution-report.md`](../../.agents/commands/execution-report.md)). Point it to your job folder (e.g. `catalog-filters-ex3`).
+
+The command compares your `dev-plan.md` to what actually happened during 3.1 and 3.2. It documents:
+- What shipped vs. what was planned
+- Where the implementation diverged from the plan (and why)
+- Challenges, surprises, and anything that was skipped
+- Validation results
+
+### Read the report
+
+**Open `execution-report.md` and read through it.** This is where the learning happens. Pay attention to:
+
+- **Divergences** — Where did reality differ from the plan? Was the plan wrong, or did the implementation make a better call? Understanding _why_ things diverged is more valuable than the divergence itself.
+- **Surprises** — What did you not anticipate? These are the things your planning process did not catch. Next time, you might think about them earlier.
+- **What went well** — Equally important. If the plan-to-implementation was smooth in certain areas, what made those areas work? Can you replicate that pattern?
+
+> This is the rubber duck debugging equivalent for your _process_ — explaining what happened forces you to understand it.
 
 ---
 
-## Steps
+## Step 2 — System review
 
-1. **`/execution-report`** — [`.agents/commands/execution-report.md`](../../.agents/commands/execution-report.md). Compare **`dev-plan.md`** to what happened in **3.1** and **3.2**.
-2. **`/system-review`** — [`.agents/commands/system-review.md`](../../.agents/commands/system-review.md). Write **`system-review.md`** in the same job folder.
-3. **Bounded Layer 1 changes:** at most **2** small, concrete edits to root [`AGENTS.md`](../../AGENTS.md) **or** [`.agents/rules/`](../../.agents/rules/INDEX.mdc) **or** **one** command file—no full rewrites. Extra ideas → **`system-review.md`**.
-4. **Docs:** update [`docs/CODEBASE_MAP.md`](../docs/CODEBASE_MAP.md), [`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md), and add a meaningful **[Unreleased]** bullet in [`CHANGELOG.md`](../CHANGELOG.md) for work through **3.3** (see [`docs/DOC_INDEX.md`](../docs/DOC_INDEX.md)).
+Run the **`/system-review`** command ([`.agents/commands/system-review.md`](../../.agents/commands/system-review.md)). Same job folder.
+
+This command goes one level deeper than the execution report. It is not about what happened — it is about _why_ it happened and what to improve in the workflow itself. The command will:
+
+1. Classify each divergence as **good** (justified, the plan was wrong) or **bad** (problematic, the process failed)
+2. Find root causes — unclear plan? Missing context? Validation gap?
+3. Propose concrete improvements to the commands, rules, or workflow
+
+### Read the review
+
+**Open `system-review.md`.** The proposed improvements are the most interesting part. You do not have to accept them all — but they give you a sense of where the workflow has friction.
 
 ---
 
-## Done when
+## Step 3 — Bounded improvements
 
-- [ ] **`execution-report.md`** and **`system-review.md`** exist beside **`dev-plan.md`**.
-- [ ] **≤2** Layer 1 / command edits **or** proposals deferred in writing.
-- [ ] Map + architecture updated; changelog entry for **3.1–3.3**.
+The system review probably proposed several improvements to the workflow. Pick **at most 2** small, concrete edits to apply now. These can be:
+
+- A small update to [`AGENTS.md`](../../AGENTS.md)
+- A tweak to a rule in [`.agents/rules/`](../../.agents/rules/)
+- A minor edit to one command file
+
+The key word is **bounded** — no full rewrites, no big restructuring. If the system review suggests more than two changes, keep the rest as proposals in `system-review.md` for future reference.
+
+For example: if the system review found that the plan missed input validation edge cases, you could add a reminder about boundary checks to the relevant rule file. Or if a command's output was unclear, a one-line clarification in that command file. Small, targeted, useful.
+
+> The reason for the limit: workflow improvements should be incremental. Big changes to the process mid-project introduce their own risks — the same principle as refactoring production code in small, tested steps.
 
 ---
 
-## Next
+## Step 4 — Update the docs
 
-**[`exercise-3.4.md`](exercise-3.4.md)** (repository abstraction).
+Your implementation changed the codebase. The docs should reflect that. Update the following:
+
+- **[`docs/CODEBASE_MAP.md`](../docs/CODEBASE_MAP.md)** — Add or update entries for files you created or changed
+- **[`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md)** — If your filtering implementation introduced new patterns or architectural decisions, document them
+- **[`CHANGELOG.md`](../CHANGELOG.md)** — Add a meaningful entry under `[Unreleased]` covering what you built in 3.1 through 3.3
+
+You can ask your assistant to help with the docs updates — it has the full context of what changed. But review what it writes. Docs that are wrong are worse than no docs.
+
+> **See [`docs/DOC_INDEX.md`](../docs/DOC_INDEX.md)** for a guide on what goes where.
+
+---
+
+## Done?
+
+- [ ] `execution-report.md` and `system-review.md` exist in your job folder
+- [ ] At most 2 bounded improvements applied (or proposals deferred in writing)
+- [ ] Codebase map and architecture docs updated
+- [ ] Changelog entry for 3.1–3.3
+
+**This wraps up the 3.1–3.3 flow.** You have now completed a full cycle: plan → implement → review → fix → reflect → improve.
+
+Take a moment to think about what you just did. You shipped a feature, reviewed it, reflected on the process, and improved the workflow — all in one continuous session. In a real project, this cycle repeats for every meaningful change. The question is not whether it takes more time. The question is: does it save you from the kind of problems that cost _real_ time — debugging in production, refactoring spaghetti code, onboarding someone to a codebase nobody documented?
+
+**Next: [Exercise 3.4 — Repository abstraction](exercise-3.4.md).** Start a **new chat session** — you are moving to a different feature and the assistant benefits from a clean context.
