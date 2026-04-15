@@ -51,11 +51,13 @@ Open the cloned folder in Cursor. You should see exercise folders (`exercise-1/`
 
 The workshop uses a small full-stack app (Python backend + React frontend). You need the following tools installed and working:
 
-- **Python 3.10+**
-- **uv** (Python package manager)
+- **Python 3.12+** (the exercises pin `>=3.12` — earlier versions will fail `uv sync`)
+- **uv** (Python package manager — can also install Python 3.12 for you if missing)
 - **Node.js LTS + npm**
 - **Bun** (JavaScript runtime)
 - **Git**
+
+> **Ports 8000 and 3000 must be free** during the workshop — the backend runs on `:8000` and the frontend on `:3000`. If you have something else bound to those ports (Docker, another dev server), stop it before the workshop.
 
 ### Option A — Let Cursor handle it
 
@@ -65,19 +67,31 @@ Open the cloned repo in Cursor and paste this into the AI chat:
 I need to set up my development environment for this workshop.
 Check which of these tools are installed and install anything that is missing:
 
-- Python 3.10+
+- Python 3.12+ (the exercises require >=3.12, not just 3.10)
 - uv (Python package manager — https://docs.astral.sh/uv/)
 - Node.js LTS + npm
 - Bun (JavaScript runtime — https://bun.sh/)
 - Git
 
+Important:
+- If you don't have permission to install system-wide tools, stop and tell me
+  the exact manual command I need to run myself (don't silently skip).
+- After each install, make sure the new binary is on PATH in a fresh shell.
+
 After installing, run these verification commands and show me the output:
 
-python3 --version
+python3 --version   # must be 3.12 or higher
 uv --version
 node --version
 bun --version
 git --version
+
+Then also verify the project toolchain actually works end-to-end by running:
+
+cd exercise-1/app/backend && uv venv --python 3.12 && uv sync && cd ../../..
+cd exercise-1/app/frontend && bun install && cd ../../..
+
+Report any errors verbatim — do not say "done" unless all commands above exited 0.
 ```
 
 Cursor will check what is already installed, install what is missing, and verify everything works. If it hits a permissions issue, it will tell you what to run manually.
@@ -89,13 +103,15 @@ Cursor will check what is already installed, install what is missing, and verify
 <details>
 <summary><strong>Python 3.10+</strong></summary>
 
-**macOS / Windows:** Download and run the installer from https://www.python.org/downloads/
+**macOS / Windows:** Download and run the installer for Python **3.12 or higher** from https://www.python.org/downloads/
 
 > On Windows: enable **"Add Python to PATH"** during installation!
 
-**Linux:** Python is often pre-installed. Check with `python3 --version`.
+**Linux:** Python is often pre-installed, but may be an older version. Check with `python3 --version` — if it is below 3.12, install a newer one (e.g. `sudo apt install python3.12`).
 
-Verify: `python3 --version` should show 3.10 or higher.
+**Shortcut:** if you have `uv` installed, you can skip installing Python manually — `uv venv --python 3.12` will download Python 3.12 for you automatically.
+
+Verify: `python3 --version` should show **3.12 or higher**.
 
 More info: [Official Python downloads](https://www.python.org/downloads/)
 
@@ -192,14 +208,34 @@ More info: [Official Git installation guide](https://git-scm.com/book/en/v2/Gett
 Run all five commands — each should print a version number:
 
 ```bash
-python3 --version    # 3.10 or higher
+python3 --version    # 3.12 or higher (earlier versions will break uv sync)
 uv --version         # any version
 node --version       # any version
 bun --version        # any version
 git --version        # any version
 ```
 
-**Seeing "command not found"?** Restart your terminal and try again. If it still fails, ask Cursor — it is usually faster at diagnosing PATH issues than scrolling through docs.
+**Seeing "command not found"?** Restart your terminal and try again — freshly installed tools only appear on PATH in a new shell. If it still fails, ask Cursor — it is usually faster at diagnosing PATH issues than scrolling through docs.
+
+### End-to-end smoke test (strongly recommended)
+
+Version numbers alone do not prove the toolchain works. Run this once from the repo root — it is the same thing the workshop will do, just earlier:
+
+```bash
+# Backend: create venv, install deps, start server briefly
+cd exercise-1/app/backend
+uv venv --python 3.12
+uv sync
+uv run python -c "from app.api import products; print('backend OK')"
+cd ../../..
+
+# Frontend: install deps, type-check
+cd exercise-1/app/frontend
+bun install
+cd ../../..
+```
+
+If both finish without errors, your environment is ready. If `uv sync` complains about Python version, your `python3` is too old — let `uv` manage it: `uv venv --python 3.12` will download 3.12 into the venv even if your system Python is older.
 
 ---
 
@@ -288,7 +324,9 @@ Before the workshop starts, make sure you can check all of these:
 
 - [ ] Cursor installed and logged in (AI chat works)
 - [ ] Repo cloned — `git clone -b cursor https://github.com/TilBardaga/agentic-coding-exercises.git`
-- [ ] Tools installed — `python3`, `uv`, `node`, `bun`, `git` all print a version number
+- [ ] Tools installed — `python3` (**3.12+**), `uv`, `node`, `bun`, `git` all print a version number
+- [ ] Ports 8000 and 3000 are free on your machine
+- [ ] End-to-end smoke test passed (`uv sync` + `bun install` completed without errors in exercise-1)
 - [ ] Dependencies pre-installed — `uv sync` and `bun install` done for exercises 1–3
 - [ ] Own project ready for Exercise 4 (builds, starts, and runs)
 - [ ] Task in mind for Exercise 4 (refactor, feature, cleanup, etc.)
